@@ -13,6 +13,7 @@ class tidalEvents:
         try:
             with urllib.request.urlopen(f"https://admiraltyapi.azure-api.net/uktidalapi/api/V1/Stations/0005/TidalEvents?duration=2&key={apiKey}") as url:
                 data = json.load(url)
+                logging.info('Request completed')
                 return data
         except:
             logging.error('Failed to get data from Admiralty API')
