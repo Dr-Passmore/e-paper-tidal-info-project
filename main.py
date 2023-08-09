@@ -45,6 +45,18 @@ class TideInformationDisplay:
         print(f"{progress}%")
 
     def percentage_calculation(self, timestamp, prioreventTime, now, event):
+        """
+        Calculates the progress percentage between previous and next tide events.
+
+        Input:
+        - timestamp: Timestamp of the next tide event.
+        - prioreventTime: Timestamp of the previous tide event.
+        - now: Current timestamp.
+        - event: Type of tide event (e.g., "HighWater" or "LowWater").
+
+        Output:
+        - progress: Progress percentage between previous and next tide events.
+        """
         timeRemaining = (timestamp - now) / 60
         timeSince = (now - prioreventTime) / 60
         total = timeRemaining + timeSince
@@ -57,6 +69,15 @@ class TideInformationDisplay:
         return progress
     
     def configurationFileCreation(self, config):
+        """
+        Creates a configuration file 'config.ini' if it doesn't exist.
+
+        Input:
+        - config: ConfigParser instance for handling configuration.
+
+        Output:
+        - None (Creates or updates the 'config.ini' file.)
+        """
         logging.info("Creating 'config.ini' file")
         try:
             tide_api = input("Please enter your API key:\n")

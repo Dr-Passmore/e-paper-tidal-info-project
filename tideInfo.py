@@ -1,15 +1,28 @@
 import apiInfo
-import urllib.request, json
+import urllib.request
+import json
 import logging
+import configparser
 
 class tidalEvents:
     def __init__(self) -> None:
-        
         pass
     
+    @staticmethod
     def get_data():
+        """
+        Retrieves tidal event data from the Admiralty API.
+
+        Output:
+        - data: JSON data containing tidal event information.
+        """
         logging.info('Requesting json file from Admiralty API')
-        apiKey = apiInfo.apiKey
+        
+        # Read the API key from config.ini
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+        apiKey = config.get('API Key', 'Key')
+        
         try:
             with urllib.request.urlopen(f"https://admiraltyapi.azure-api.net/uktidalapi/api/V1/Stations/0005/TidalEvents?duration=2&key={apiKey}") as url:
                 data = json.load(url)
@@ -17,6 +30,7 @@ class tidalEvents:
                 return data
         except:
             logging.error('Failed to get data from Admiralty API')
+            
 logging.basicConfig(filename='TideInfo.log', 
                     filemode='a', 
                     level=logging.INFO,
