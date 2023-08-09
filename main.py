@@ -2,10 +2,20 @@ import tideInfo
 import logging
 import datetime
 import time
+import configparser
+import os
 
 class TideInformationDisplay:
     def __init__(self):
         logging.info('Initialising Data Retrieval and e-ink update')
+        config = configparser.ConfigParser()
+        configFile = os.path.exists('config.ini')
+        if configFile == False:
+            #if the file does not exist then create one
+            logging.error("No config file found")
+            TideInformationDisplay.configurationFileCreation(self, config)
+        else:
+            pass
         data = tideInfo.tidalEvents.get_data()
         TideInformationDisplay.data_processing(self, data)
 
@@ -28,6 +38,13 @@ class TideInformationDisplay:
                     previousEventTime = eventTime
                     prioreventTime = timestamp
             
+        progress = TideInformationDisplay.percentage_calculation(self, timestamp, prioreventTime, now, event)
+            
+        print(f"The next tide event is {event} at a Height of {height} meters on {eventTime}")
+        print(f"The last tide event was {pastevent} at a Height of {pastheight} meters on {previousEventTime}")
+        print(f"{progress}%")
+
+    def percentage_calculation(self, timestamp, prioreventTime, now, event):
         timeRemaining = (timestamp - now) / 60
         timeSince = (now - prioreventTime) / 60
         total = timeRemaining + timeSince
@@ -36,9 +53,22 @@ class TideInformationDisplay:
         
         if event == "LowWater":
             progress = 100 - progress
+        
+        return progress
+    
+    def configurationFileCreation(self, config):
+        logging.info("Creating 'config.ini' file")
+        try:
+            tide_api = input("Please enter your API key:\n")
+            config.add_section('API Key')
+            config.set('API Key', 'Key', tide_api)
+            with open(r"config.ini", 'w') as configuration:
+                config.write(configuration)
+            logging.info('config.ini created successfully')
+        except Exception as e:
+            logging.error(f"Failed to create config.ini: {e}")
             
-        print(f"The next tide event is {event} at a Height of {height} meters on {eventTime}")
-
+        
 logging.basicConfig(filename='TideInfo.log', 
                     filemode='a', 
                     level=logging.INFO,
