@@ -4,3 +4,4 @@ secrets2.py
 apiInfo.py
 .vscode/settings.json
 TideInfo.log
+config.ini
