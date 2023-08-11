@@ -1,4 +1,4 @@
-import apiInfo
+import einkDisplayUpdate
 import urllib.request
 import json
 import logging
@@ -28,9 +28,11 @@ class tidalEvents:
                 data = json.load(url)
                 logging.info('Request completed')
                 return data
-        except:
+        except Exception as e:
             logging.error('Failed to get data from Admiralty API')
-            
+            logging.error(f'{e}')
+            einkDisplayUpdate.einkUpdate.error_display(e)
+
 logging.basicConfig(filename='TideInfo.log', 
                     filemode='a', 
                     level=logging.INFO,

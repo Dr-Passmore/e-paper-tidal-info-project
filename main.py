@@ -1,4 +1,5 @@
 import tideInfo
+import einkDisplayUpdate
 import logging
 import datetime
 import time
@@ -17,53 +18,80 @@ class TideInformationDisplay:
         else:
             pass
         data = tideInfo.tidalEvents.get_data()
-        TideInformationDisplay.data_processing(self, config, data)
-
+        
+        screenupdate = TideInformationDisplay.data_processing(self, config, data)
+        print(screenupdate)
     def data_processing(self, config, data):
+        """
+        Process tidal event data, update records, and send processed data to the e-ink display script.
+
+        Input:
+        - config: ConfigParser instance for handling configuration.
+        - data: List of dictionaries containing tidal event information.
+
+        Output:
+        - screen_update: Result of updating the e-ink display message 
+        """
+        
         config.read('config.ini')
         
-        for x in data:
-                event = (x['EventType'])
-                height = (x['Height'])
-                eventTime = (x['DateTime'])
-                eventTime = eventTime[:19]
-                print(datetime.date.today())
-                
-                when = datetime.datetime.strptime(eventTime,"%Y-%m-%dT%H:%M:%S")
-                recordsdate = when
-                timestamp = datetime.datetime.timestamp(when)
-                now = time.time()
-                eventTime = eventTime[11:16]
-                if timestamp > now:
-                    break
-                else: 
-                    pastevent = event
-                    pastheight = height
-                    previousEventTime = eventTime
-                    prioreventTime = timestamp
-        
-        if event == 'HighWater':
-            currentRecord = config.get('Records', 'Highest Tide Height')
+        if data == None:
+            logging.error('Display failed to update')
             
-            if float(currentRecord) < height:
-                config.set('Records', 'Highest Tide Height', str(height))
-                config.set('Records', 'Highest Tide Date', str(recordsdate))
-                with open(r"config.ini", 'w') as configuration:
-                    config.write(configuration)
         else:
-            currentRecord = config.get('Records', 'Lighest Tide Height')
-            if float(currentRecord) > height:
-                config.set('Records', 'Lighest Tide Height', str(height))
-                config.set('Records', 'Lowest Tide Date', str(recordsdate))
-                with open(r"config.ini", 'w') as configuration:
-                    config.write(configuration)
-        
-        progress = TideInformationDisplay.percentage_calculation(self, timestamp, prioreventTime, now, event)
+            ''' 
+            Data contains multiple events which are ordered oldest to the next tide event.
+            The old varibles overwrite data held in the past varibles 'pastevent' etc
+            This leaves only the previous tide event and the next tide event. 
+            ''' 
+            for x in data:
+                    event = (x['EventType'])
+                    height = (x['Height'])
+                    eventTime = (x['DateTime'])
+                    eventTime = eventTime[:19]
+                    
+                    when = datetime.datetime.strptime(eventTime,"%Y-%m-%dT%H:%M:%S")
+                    recordsdate = when
+                    timestamp = datetime.datetime.timestamp(when)
+                    now = time.time()
+                    eventTime = eventTime[11:16]
+                    if timestamp > now:
+                        break
+                    else: 
+                        pastevent = event
+                        pastheight = height
+                        previousEventTime = eventTime
+                        prioreventTime = timestamp
             
-        print(f"The next tide event is {event} at a Height of {height} meters on {eventTime}")
-        print(f"The last tide event was {pastevent} at a Height of {pastheight} meters on {previousEventTime}")
-        print(f"{progress}%")
+            if event == 'HighWater':
+                currentRecord = config.get('Records', 'Highest Tide Height')
+                
+                if float(currentRecord) < height:
+                    logging.info(f"New {event} record set of a height of {height}M")
+                    config.set('Records', 'Highest Tide Height', str(height))
+                    config.set('Records', 'Highest Tide Date', str(recordsdate))
+                    with open(r"config.ini", 'w') as configuration:
+                        config.write(configuration)
+            else:
+                currentRecord = config.get('Records', 'Lighest Tide Height')
+                
+                if float(currentRecord) > height:
+                    logging.info(f"New {event} record set of a height of {height}M")
+                    config.set('Records', 'Lighest Tide Height', str(height))
+                    config.set('Records', 'Lowest Tide Date', str(recordsdate))
+                    with open(r"config.ini", 'w') as configuration:
+                        config.write(configuration)
+            
+            progress = TideInformationDisplay.percentage_calculation(self, timestamp, prioreventTime, now, event)
+                
+            print(f"The next tide event is {event} at a Height of {height} meters on {eventTime}")
+            print(f"The last tide event was {pastevent} at a Height of {pastheight} meters on {previousEventTime}")
+            print(f"{progress}%")
+            
+            screenupdate = einkDisplayUpdate.einkUpdate.display_tide_info(event, height, eventTime, pastevent, pastheight, previousEventTime, progress)
 
+            return screenupdate
+        
     def percentage_calculation(self, timestamp, prioreventTime, now, event):
         """
         Calculates the progress percentage between previous and next tide events.
@@ -107,7 +135,8 @@ class TideInformationDisplay:
             config.set('Records', 'Highest Tide Date', str(datetime.date.today()))
             config.set('Records', 'Highest Tide Height', str(0.00))
             config.set('Records', 'Lowest Tide Date', str(datetime.date.today()))
-            config.set('Records', 'Lighest Tide Height', str(10.00))
+            config.set('Records', 'Lowest Tide Height', str(10.00))
+            config.set('Records', 'Start Date', str(datetime.date.today()))
             with open(r"config.ini", 'w') as configuration:
                 config.write(configuration)
             logging.info('config.ini created successfully')
