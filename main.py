@@ -17,16 +17,20 @@ class TideInformationDisplay:
         else:
             pass
         data = tideInfo.tidalEvents.get_data()
-        TideInformationDisplay.data_processing(self, data)
+        TideInformationDisplay.data_processing(self, config, data)
 
-    def data_processing(self, data):
+    def data_processing(self, config, data):
+        config.read('config.ini')
+        
         for x in data:
                 event = (x['EventType'])
                 height = (x['Height'])
                 eventTime = (x['DateTime'])
                 eventTime = eventTime[:19]
+                print(datetime.date.today())
                 
                 when = datetime.datetime.strptime(eventTime,"%Y-%m-%dT%H:%M:%S")
+                recordsdate = when
                 timestamp = datetime.datetime.timestamp(when)
                 now = time.time()
                 eventTime = eventTime[11:16]
@@ -37,7 +41,23 @@ class TideInformationDisplay:
                     pastheight = height
                     previousEventTime = eventTime
                     prioreventTime = timestamp
+        
+        if event == 'HighWater':
+            currentRecord = config.get('Records', 'Highest Tide Height')
             
+            if float(currentRecord) < height:
+                config.set('Records', 'Highest Tide Height', str(height))
+                config.set('Records', 'Highest Tide Date', str(recordsdate))
+                with open(r"config.ini", 'w') as configuration:
+                    config.write(configuration)
+        else:
+            currentRecord = config.get('Records', 'Lighest Tide Height')
+            if float(currentRecord) > height:
+                config.set('Records', 'Lighest Tide Height', str(height))
+                config.set('Records', 'Lowest Tide Date', str(recordsdate))
+                with open(r"config.ini", 'w') as configuration:
+                    config.write(configuration)
+        
         progress = TideInformationDisplay.percentage_calculation(self, timestamp, prioreventTime, now, event)
             
         print(f"The next tide event is {event} at a Height of {height} meters on {eventTime}")
@@ -83,6 +103,11 @@ class TideInformationDisplay:
             tide_api = input("Please enter your API key:\n")
             config.add_section('API Key')
             config.set('API Key', 'Key', tide_api)
+            config.add_section('Records')
+            config.set('Records', 'Highest Tide Date', str(datetime.date.today()))
+            config.set('Records', 'Highest Tide Height', str(0.00))
+            config.set('Records', 'Lowest Tide Date', str(datetime.date.today()))
+            config.set('Records', 'Lighest Tide Height', str(10.00))
             with open(r"config.ini", 'w') as configuration:
                 config.write(configuration)
             logging.info('config.ini created successfully')
