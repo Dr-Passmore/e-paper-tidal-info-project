@@ -5,3 +5,4 @@ apiInfo.py
 .vscode/settings.json
 TideInfo.log
 config.ini
+lib/waveshare_epd/__pycache__/*
