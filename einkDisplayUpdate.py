@@ -2,7 +2,7 @@ import logging
 from PIL import Image,ImageDraw,ImageFont
 from waveshare_epd import epd2in13bc
 import time
-import os
+
 
 
 
@@ -17,8 +17,8 @@ class einkUpdate:
         print(f"error: {e}")
         epd = epd2in13bc.EPD()
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
-        picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
-        robotoblack32 = ImageFont.truetype(os.path.join(picdir, 'Roboto-Black.ttf'), 32)
+        
+        robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
         drawblack = ImageDraw.Draw(HBlackimage)
         
         drawblack.text((2, 0), f'hello world {e}', font = robotoblack32, fill = 0)
@@ -38,8 +38,7 @@ class einkUpdate:
         einkUpdate.refresh_display(epd)
         
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
-        picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
-        robotoblack32 = ImageFont.truetype(os.path.join(picdir, 'Roboto-Black.ttf'), 32)
+        robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
         drawblack = ImageDraw.Draw(HBlackimage)
         
         drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
