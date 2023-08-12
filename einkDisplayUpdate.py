@@ -21,7 +21,7 @@ class einkUpdate:
         robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
         drawblack = ImageDraw.Draw(HBlackimage)
         
-        drawblack.text((2, 0), f'hello world {e}', font = robotoblack32, fill = 0)
+        drawblack.text((2, 0), f'hello world {e}', font = robotoblack32, fill = 1)
         epd.sleep()
     
     def refresh_display(epd):
@@ -41,7 +41,7 @@ class einkUpdate:
         robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
         drawblack = ImageDraw.Draw(HBlackimage)
         
-        drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
+        drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 1)
         
         
         print("Tide info")
