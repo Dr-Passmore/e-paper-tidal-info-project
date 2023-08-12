@@ -49,7 +49,7 @@ class einkUpdate:
         print(f"{event}: {eventTime} with a height of {height}M")
         
         epd.Clear()
-        epd.display(epd.getbuffer(HBlackimage))
+        epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HBlackimage))
         
         
         epd.sleep()
