@@ -39,11 +39,12 @@ class einkUpdate:
         
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
         robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
+        robotoblack18 = ImageFont.truetype('pic/Roboto-Black.ttf', 18)
         drawblack = ImageDraw.Draw(HBlackimage)
         
         #drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
-        drawblack.text((2, 0), f'Event: {height:.2f}', font = robotoblack32, fill = 0)
-        
+        drawblack.text((2, 0), f'height: {height:.2f}', font = robotoblack18, fill = 0)
+        drawblack.text((2, 40), f'event: {event}', font = robotoblack18, fill = 0)
         
         print("Tide info")
         einkUpdate.loading_message(epd)
