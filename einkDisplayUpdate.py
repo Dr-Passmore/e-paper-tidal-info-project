@@ -43,8 +43,9 @@ class einkUpdate:
         drawblack = ImageDraw.Draw(HBlackimage)
         
         #drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
-        drawblack.text((2, 0), f'height: {height:.2f}', font = robotoblack18, fill = 0)
-        drawblack.text((2, 40), f'event: {event}', font = robotoblack18, fill = 0)
+        drawblack.text((2, 0), f'event: {event}', font = robotoblack18, fill = 0)
+        drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
+        drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
         print("Tide info")
         einkUpdate.loading_message(epd)
