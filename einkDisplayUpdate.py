@@ -41,7 +41,7 @@ class einkUpdate:
         robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
         drawblack = ImageDraw.Draw(HBlackimage)
         
-        drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 1)
+        drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
         
         
         print("Tide info")
@@ -49,7 +49,7 @@ class einkUpdate:
         print(f"{event}: {eventTime} with a height of {height}M")
         
         epd.Clear()
-        epd.display(epd.getbuffer(drawblack))
+        epd.display(epd.getbuffer(HBlackimage))
         
         
         epd.sleep()
