@@ -38,8 +38,10 @@ class einkUpdate:
         highHeight = config.get('Records', 'highest tide height')
         highestTideDate = config.get('Records', 'highest tide date')
         drawblack.text((2, 0), f'Records Since {startDate}', font = robotoblack32, fill = 0)
-        drawblack.text((2, 30), f'High Tide height: {highHeight:.2f}', font = robotoblack18, fill = 0)
+        drawblack.text((2, 30), f'High Tide height: {float(highHeight):.2f}', font = robotoblack18, fill = 0)
         drawblack.text((2, 50), f'Time: {highestTideDate}', font = robotoblack18, fill = 0)
+        
+        epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HBlackimage))
         
         time.sleep(30)
         
