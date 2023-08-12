@@ -1,15 +1,12 @@
 import logging
 from PIL import Image,ImageDraw,ImageFont
-
+from waveshare_epd import epd2in13bc
 import time
-import sys
 import os
 
-libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
-if os.path.exists(libdir):
-    sys.path.append(libdir)
 
-from waveshare_epd import epd2in13bc
+
+
 
 class einkUpdate:
     def __init__(self) -> None:
