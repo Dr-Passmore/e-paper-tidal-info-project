@@ -40,7 +40,7 @@ class einkUpdate:
         drawblack.text((2, 0), f'Records Since {startDate}', font = robotoblack32, fill = 0)
         drawblack.text((2, 30), f'High Tide height: {float(highHeight):.2f}', font = robotoblack18, fill = 0)
         drawblack.text((2, 50), f'Time: {highestTideDate}', font = robotoblack18, fill = 0)
-        
+        epd.Clear()
         epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HBlackimage))
         
         time.sleep(30)
@@ -57,6 +57,7 @@ class einkUpdate:
         robotoblack18 = ImageFont.truetype('pic/Roboto-Black.ttf', 18)
         robotoblack12 = ImageFont.truetype('pic/Roboto-Black.ttf', 12)
         drawblack = ImageDraw.Draw(HBlackimage)
+        einkUpdate.loading_message(epd, robotoblack12, robotoblack18, robotoblack32, drawblack, HBlackimage)
         
         #drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
         drawblack.text((2, 0), f'event: {event}', font = robotoblack18, fill = 0)
@@ -64,7 +65,7 @@ class einkUpdate:
         drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
         print("Tide info")
-        einkUpdate.loading_message(epd, robotoblack12, robotoblack18, robotoblack32, drawblack, HBlackimage)
+        
         print(f"{event}: {eventTime} with a height of {height}M")
         
         epd.Clear()
