@@ -30,18 +30,21 @@ class einkUpdate:
         epd.Clear()
         time.sleep(1)
     
-    def loading_message(epd, robotoblack12, robotoblack18, robotoblack32, drawblack, HBlackimage):
+    def loading_message(epd, robotoblack12, robotoblack18, robotoblack32):
         logging.info("loading message - Records")
+        LoadingBlackimage = Image.new('1', (epd.height, epd.width), 255)
+        drawLoadBlack = ImageDraw.Draw(LoadingBlackimage)
         config = configparser.ConfigParser()
         config.read('config.ini')
         startDate = config.get('Records', 'start date')
         highHeight = config.get('Records', 'highest tide height')
         highestTideDate = config.get('Records', 'highest tide date')
-        drawblack.text((2, 0), f'Records Since {startDate}', font = robotoblack32, fill = 0)
-        drawblack.text((2, 30), f'High Tide height: {float(highHeight):.2f}', font = robotoblack18, fill = 0)
-        drawblack.text((2, 50), f'Time: {highestTideDate}', font = robotoblack18, fill = 0)
+        drawLoadBlack.text((2, 0), f'Records:', font = robotoblack32, fill = 0)
+        drawLoadBlack.text((2, 30), f'High Tide height: {float(highHeight):.2f}', font = robotoblack18, fill = 0)
+        drawLoadBlack.text((2, 50), f'Time: {highestTideDate}', font = robotoblack18, fill = 0)
+        drawLoadBlack.text((2, 70), f'Since {startDate}', font = robotoblack12, fill = 0)
         epd.Clear()
-        epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HBlackimage))
+        epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(LoadingBlackimage))
         
         time.sleep(30)
         
@@ -57,7 +60,7 @@ class einkUpdate:
         robotoblack18 = ImageFont.truetype('pic/Roboto-Black.ttf', 18)
         robotoblack12 = ImageFont.truetype('pic/Roboto-Black.ttf', 12)
         drawblack = ImageDraw.Draw(HBlackimage)
-        einkUpdate.loading_message(epd, robotoblack12, robotoblack18, robotoblack32, drawblack, HBlackimage)
+        einkUpdate.loading_message(epd, robotoblack12, robotoblack18, robotoblack32)
         
         #drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
         drawblack.text((2, 0), f'event: {event}', font = robotoblack18, fill = 0)
