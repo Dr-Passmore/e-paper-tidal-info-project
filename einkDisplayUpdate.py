@@ -2,6 +2,7 @@ import logging
 from PIL import Image,ImageDraw,ImageFont
 from waveshare_epd import epd2in13bc
 import time
+import configparser
 
 
 
@@ -29,8 +30,20 @@ class einkUpdate:
         epd.Clear()
         time.sleep(1)
     
-    def loading_message(epd):
-        print("loading")
+    def loading_message(epd, robotoblack12, robotoblack18, robotoblack32, drawblack, HBlackimage):
+        logging.info("loading message - Records")
+        config = configparser.ConfigParser()
+        config.read('config.ini')
+        startDate = config.get('Records', 'start date')
+        highHeight = config.get('Records', 'highest tide height')
+        highestTideDate = config.get('Records', 'highest tide date')
+        drawblack.text((2, 0), f'Records Since {startDate}', font = robotoblack32, fill = 0)
+        drawblack.text((2, 30), f'High Tide height: {highHeight:.2f}', font = robotoblack18, fill = 0)
+        drawblack.text((2, 50), f'Time: {highestTideDate}', font = robotoblack18, fill = 0)
+        
+        time.sleep(30)
+        
+        einkUpdate.refresh_display(epd)
         
     def display_tide_info(event, height, eventTime, pastevent, pastheight, previousEventTime, progress):
         logging.info("init and Clear")
@@ -40,6 +53,7 @@ class einkUpdate:
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
         robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
         robotoblack18 = ImageFont.truetype('pic/Roboto-Black.ttf', 18)
+        robotoblack12 = ImageFont.truetype('pic/Roboto-Black.ttf', 12)
         drawblack = ImageDraw.Draw(HBlackimage)
         
         #drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
@@ -48,7 +62,7 @@ class einkUpdate:
         drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
         print("Tide info")
-        einkUpdate.loading_message(epd)
+        einkUpdate.loading_message(epd, robotoblack12, robotoblack18, robotoblack32, drawblack, HBlackimage)
         print(f"{event}: {eventTime} with a height of {height}M")
         
         epd.Clear()
