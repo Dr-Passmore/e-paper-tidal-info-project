@@ -73,11 +73,11 @@ class TideInformationDisplay:
                     with open(r"config.ini", 'w') as configuration:
                         config.write(configuration)
             else:
-                currentRecord = config.get('Records', 'Lighest Tide Height')
+                currentRecord = config.get('Records', 'Lowest Tide Height')
                 
                 if float(currentRecord) > height:
                     logging.info(f"New {event} record set of a height of {height}M")
-                    config.set('Records', 'Lighest Tide Height', str(height))
+                    config.set('Records', 'Lowest Tide Height', str(height))
                     config.set('Records', 'Lowest Tide Date', str(recordsdate))
                     with open(r"config.ini", 'w') as configuration:
                         config.write(configuration)
