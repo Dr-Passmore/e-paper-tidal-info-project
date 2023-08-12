@@ -48,6 +48,9 @@ class einkUpdate:
         einkUpdate.loading_message(epd)
         print(f"{event}: {eventTime} with a height of {height}M")
         
+        epd.Clear()
+        epd.display(epd.getbuffer(drawblack))
+        
         
         epd.sleep()
         
