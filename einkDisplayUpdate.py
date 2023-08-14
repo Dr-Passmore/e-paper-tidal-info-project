@@ -27,6 +27,7 @@ class einkUpdate:
         epd.sleep()
     
     def refresh_display(epd):
+        logging.info("Refreshing Display")
         epd.init()
         epd.Clear()
         time.sleep(1)
@@ -36,9 +37,11 @@ class einkUpdate:
         #212(W) x 104(H) pixel
         logging.info("loading message - Records")
         
+        # Selection process for whether the loading screen shows low or high tide record
         previousRecords = ["high", "low"]
         selection = random.choice(previousRecords) 
-        logging.info(f"Loading message of {selection} selected")
+        
+        logging.info(f"Loading message of {selection} tide record selected")
         LoadingBlackimage = Image.new('1', (epd.height, epd.width), 255)  
         Other = Image.new('1', (epd.height, epd.width), 255)
         drawLoadBlack = ImageDraw.Draw(LoadingBlackimage)
@@ -46,16 +49,22 @@ class einkUpdate:
         config = configparser.ConfigParser()
         config.read('config.ini')
         
+        # Gets stored values from config.ini
         startDate = config.get('Records', 'start date')
         highHeight = config.get('Records', 'highest tide height')
         highestTideDate = config.get('Records', 'highest tide date')
         lowHeight = config.get('Records', 'lowest tide height') 
         lowestTideDate = config.get('Records', 'lowest tide date')
         
+        # Title of 'Records' added at top of layout
         drawLoadBlack.text((30, 0), f'Records:', font=robotoblack32, fill=0)
+        
+        # Draws red borders
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
         draw_other.rectangle((0, 30, epd.height, 35), fill=0)
+        draw_other.rectangle((0, 30, 5, 0), fill=0)
         
+        # If high tide recorded select it provides the height, date and time recorded. Along with start date the screen has been running from
         if selection == "high":
             highest_tide_datetime = datetime.strptime(highestTideDate, "%Y-%m-%d %H:%M:%S")
             daterecorded = highest_tide_datetime.strftime("%Y-%m-%d")
@@ -64,7 +73,8 @@ class einkUpdate:
             drawLoadBlack.text((2, 55), f'Recorded On: {daterecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 75), f'At: {timerecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack14, fill=0)
-            
+        
+        # If low tide recorded select it provides the height, date and time recorded. Along with start date the screen has been running from
         else: 
             lowest_tide_datetime = datetime.strptime(lowestTideDate, "%Y-%m-%d %H:%M:%S")
             daterecorded = lowest_tide_datetime.strftime("%Y-%m-%d")
@@ -74,10 +84,14 @@ class einkUpdate:
             drawLoadBlack.text((2, 75), f'At: {timerecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack14, fill=0)
         
+        # Updates the display
         epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(Other)) 
         epd.sleep()
+        
+        # Waits 60 seconds
         time.sleep(60)
         
+        # Refreshes the display ready for current tide info
         einkUpdate.refresh_display(epd)
         
     def display_tide_info(event, height, eventTime, pastevent, pastheight, previousEventTime, progress):
@@ -104,7 +118,7 @@ class einkUpdate:
         
         print(f"{event}: {eventTime} with a height of {height}M")
         
-        epd.Clear()
+        
         epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HBlackimage))
         
         
