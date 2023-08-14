@@ -50,15 +50,15 @@ class einkUpdate:
         lowHeight = config.get('Records', 'lowest tide height') 
         lowestTideDate = config.get('Records', 'lowest tide date')
         
-        draw_other.rectangle((0, 25, 0, 10), fill=0)
-        drawLoadBlack.text((2, 0), f'Records:', font=robotoblack32, fill=0)
+        draw_other.rectangle((0, 25, 50, 100), fill=0)
+        drawLoadBlack.text((30, 0), f'Records:', font=robotoblack32, fill=0)
         if random.choice(previousRecords) == "high":
-            drawLoadBlack.text((2, 30), f'High Tide height: {float(highHeight):.2f}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 30), f'High Tide Height: {float(highHeight):.2f}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 50), f'Time: {highestTideDate}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 70), f'Since {startDate}', font=robotoblack12, fill=0)
             
         else: 
-            drawLoadBlack.text((2, 30), f'High Tide height: {float(lowHeight):.2f}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 30), f'Low Tide Height: {float(lowHeight):.2f}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 50), f'Time: {lowestTideDate}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 70), f'Since {startDate}', font=robotoblack12, fill=0)
         epd.Clear()
