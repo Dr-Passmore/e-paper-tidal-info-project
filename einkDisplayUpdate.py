@@ -53,7 +53,8 @@ class einkUpdate:
         lowestTideDate = config.get('Records', 'lowest tide date')
         
         drawLoadBlack.text((30, 0), f'Records:', font=robotoblack32, fill=0)
-        draw_other.rectangle((0, 0, epd.height, 30), fill=0)
+        draw_other.rectangle((0, 0, epd.height, 5), fill=0)
+        draw_other.rectangle((0, 25, epd.height, 30), fill=0)
         
         if selection == "high":
             highest_tide_datetime = datetime.strptime(highestTideDate, "%Y-%m-%d %H:%M:%S")
