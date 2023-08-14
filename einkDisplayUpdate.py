@@ -4,7 +4,7 @@ from waveshare_epd import epd2in13bc
 import time
 import configparser
 import random
-
+from datetime import datetime
 
 
 
@@ -13,8 +13,8 @@ import random
 class einkUpdate:
     def __init__(self) -> None:
         
-        
         pass
+    
     def error_display(e):
         print(f"error: {e}")
         epd = epd2in13bc.EPD()
@@ -37,6 +37,8 @@ class einkUpdate:
         logging.info("loading message - Records")
         
         previousRecords = ["high", "low"]
+        selection = random.choice(previousRecords) 
+        logging.info(f"Loading message of {selection} selected")
         LoadingBlackimage = Image.new('1', (epd.height, epd.width), 255)  
         Other = Image.new('1', (epd.height, epd.width), 255)
         drawLoadBlack = ImageDraw.Draw(LoadingBlackimage)
@@ -52,19 +54,27 @@ class einkUpdate:
         
         draw_other.rectangle((0, 0, epd.height, 30), fill=0)
         drawLoadBlack.text((30, 0), f'Records:', font=robotoblack32, fill=0)
-        if random.choice(previousRecords) == "high":
+        if selection == "high":
+            highest_tide_datetime = datetime.strptime(highestTideDate, "%Y-%m-%d %H:%M:%S")
+            date = highest_tide_datetime.strftime("%Y-%m-%d")
+            time = highest_tide_datetime.strftime("%H:%M:%S")
             drawLoadBlack.text((2, 30), f'High Tide Height: {float(highHeight):.2f}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 50), f'Time: {highestTideDate}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 70), f'Since {startDate}', font=robotoblack12, fill=0)
+            drawLoadBlack.text((2, 50), f'Recorded On: {date}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 70), f'At: {time}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 90), f'Since {startDate}', font=robotoblack12, fill=0)
             
         else: 
+            lowest_tide_datetime = datetime.strptime(lowestTideDate, "%Y-%m-%d %H:%M:%S")
+            date = lowest_tide_datetime.strftime("%Y-%m-%d")
+            time = lowest_tide_datetime.strftime("%H:%M:%S")
             drawLoadBlack.text((2, 30), f'Low Tide Height: {float(lowHeight):.2f}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 50), f'Time: {lowestTideDate}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 70), f'Since {startDate}', font=robotoblack12, fill=0)
-        epd.Clear()
-        epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(Other)) 
+            drawLoadBlack.text((2, 50), f'Recorded On: {date}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 70), f'At: {time}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 90), f'Since {startDate}', font=robotoblack12, fill=0)
         
-        time.sleep(180)
+        epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(Other)) 
+        epd.sleep()
+        time.sleep(60)
         
         einkUpdate.refresh_display(epd)
         
