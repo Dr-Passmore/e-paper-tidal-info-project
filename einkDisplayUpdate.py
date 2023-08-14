@@ -57,24 +57,24 @@ class einkUpdate:
         
         if selection == "high":
             highest_tide_datetime = datetime.strptime(highestTideDate, "%Y-%m-%d %H:%M:%S")
-            date = highest_tide_datetime.strftime("%Y-%m-%d")
-            time = highest_tide_datetime.strftime("%H:%M:%S")
+            daterecorded = highest_tide_datetime.strftime("%Y-%m-%d")
+            timerecorded = highest_tide_datetime.strftime("%H:%M:%S")
             drawLoadBlack.text((2, 30), f'High Tide Height: {float(highHeight):.2f}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 50), f'Recorded On: {date}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 70), f'At: {time}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 50), f'Recorded On: {daterecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 70), f'At: {timerecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack14, fill=0)
             
         else: 
             lowest_tide_datetime = datetime.strptime(lowestTideDate, "%Y-%m-%d %H:%M:%S")
-            date = lowest_tide_datetime.strftime("%Y-%m-%d")
-            time = lowest_tide_datetime.strftime("%H:%M:%S")
+            daterecorded = lowest_tide_datetime.strftime("%Y-%m-%d")
+            timerecorded = lowest_tide_datetime.strftime("%H:%M:%S")
             drawLoadBlack.text((2, 30), f'Low Tide Height: {float(lowHeight):.2f}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 50), f'Recorded On: {date}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 70), f'At: {time}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 50), f'Recorded On: {daterecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 70), f'At: {timerecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack12, fill=0)
         
         epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(Other)) 
-        
+        epd.sleep()
         time.sleep(60)
         
         einkUpdate.refresh_display(epd)
