@@ -71,7 +71,7 @@ class einkUpdate:
             drawLoadBlack.text((2, 30), f'Low Tide Height: {float(lowHeight):.2f}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 50), f'Recorded On: {daterecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 70), f'At: {timerecorded}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack12, fill=0)
+            drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack14, fill=0)
         
         epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(Other)) 
         epd.sleep()
