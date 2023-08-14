@@ -3,6 +3,7 @@ from PIL import Image,ImageDraw,ImageFont
 from waveshare_epd import epd2in13bc
 import time
 import configparser
+import random
 
 
 
@@ -35,37 +36,31 @@ class einkUpdate:
         #212(W) x 104(H) pixel
         logging.info("loading message - Records")
         
-        '''LoadingBlackimage = Image.new('1', (epd.height, epd.width), 255)
-        Other = Image.new('1', (epd.width, epd.height), 255)
-        drawLoadBlack = ImageDraw.Draw(LoadingBlackimage)
-        draw_other = ImageDraw.Draw(Other)
-        config = configparser.ConfigParser()
-        config.read('config.ini')
-        startDate = config.get('Records', 'start date')
-        highHeight = config.get('Records', 'highest tide height')
-        highestTideDate = config.get('Records', 'highest tide date')
-        draw_other.rectangle((0, 25, 0, 25), fill = 0)  
-        drawLoadBlack.text((2, 0), f'Records:', font = robotoblack32, fill = 1)
-        drawLoadBlack.text((2, 30), f'High Tide height: {float(highHeight):.2f}', font = robotoblack18, fill = 0)
-        drawLoadBlack.text((2, 50), f'Time: {highestTideDate}', font = robotoblack18, fill = 0)
-        drawLoadBlack.text((2, 70), f'Since {startDate}', font = robotoblack12, fill = 0)
-        epd.Clear()
-        epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(draw_other))'''
-        
+        previousRecords = ["high", "low"]
         LoadingBlackimage = Image.new('1', (epd.height, epd.width), 255)  
         Other = Image.new('1', (epd.height, epd.width), 255)
         drawLoadBlack = ImageDraw.Draw(LoadingBlackimage)
         draw_other = ImageDraw.Draw(Other)
         config = configparser.ConfigParser()
         config.read('config.ini')
+        
         startDate = config.get('Records', 'start date')
         highHeight = config.get('Records', 'highest tide height')
         highestTideDate = config.get('Records', 'highest tide date')
-        draw_other.rectangle((0, 25, epd.width, 50), fill=0)  
-        drawLoadBlack.text((2, 0), f'Records:', font=robotoblack32, fill=1)
-        drawLoadBlack.text((2, 30), f'High Tide height: {float(highHeight):.2f}', font=robotoblack18, fill=0)
-        drawLoadBlack.text((2, 50), f'Time: {highestTideDate}', font=robotoblack18, fill=0)
-        drawLoadBlack.text((2, 70), f'Since {startDate}', font=robotoblack12, fill=0)
+        lowHeight = config.get('Records', 'lowest tide height') 
+        lowestTideDate = config.get('Records', 'lowest tide date')
+        
+        draw_other.rectangle((0, 25, 0, 10), fill=0)
+        drawLoadBlack.text((2, 0), f'Records:', font=robotoblack32, fill=0)
+        if random.choice(previousRecords) == "high":
+            drawLoadBlack.text((2, 30), f'High Tide height: {float(highHeight):.2f}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 50), f'Time: {highestTideDate}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 70), f'Since {startDate}', font=robotoblack12, fill=0)
+            
+        else: 
+            drawLoadBlack.text((2, 30), f'High Tide height: {float(lowHeight):.2f}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 50), f'Time: {lowestTideDate}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 70), f'Since {startDate}', font=robotoblack12, fill=0)
         epd.Clear()
         epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(Other)) 
         
