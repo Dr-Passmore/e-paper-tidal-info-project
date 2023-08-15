@@ -70,7 +70,7 @@ class einkUpdate:
             highest_tide_datetime = datetime.strptime(highestTideDate, "%Y-%m-%d %H:%M:%S")
             daterecorded = highest_tide_datetime.strftime("%Y-%m-%d")
             timerecorded = highest_tide_datetime.strftime("%H:%M:%S")
-            drawLoadBlack.text((2, 35), f'High Tide Height: {float(highHeight):.2f}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 35), f'High Tide Height: {float(highHeight):.2f} m', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 55), f'Recorded On: {daterecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 75), f'At: {timerecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack14, fill=0)
@@ -80,7 +80,7 @@ class einkUpdate:
             lowest_tide_datetime = datetime.strptime(lowestTideDate, "%Y-%m-%d %H:%M:%S")
             daterecorded = lowest_tide_datetime.strftime("%Y-%m-%d")
             timerecorded = lowest_tide_datetime.strftime("%H:%M:%S")
-            drawLoadBlack.text((2, 35), f'Low Tide Height: {float(lowHeight):.2f}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 35), f'Low Tide Height: {float(lowHeight):.2f} m', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 55), f'Recorded On: {daterecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 75), f'At: {timerecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack14, fill=0)
@@ -97,6 +97,7 @@ class einkUpdate:
         
     def display_tide_info(event, height, eventTime, pastevent, pastheight, previousEventTime, progress):
         #212(H) x 104(V) pixel
+        progress = einkUpdate.progressBar(progress)
         logging.info("init and Clear")
         epd = epd2in13bc.EPD()
         einkUpdate.refresh_display(epd)
@@ -130,6 +131,12 @@ class einkUpdate:
         logging.info(updateCompleted)
         
         return updateCompleted
+    
+    def progressBar(progress):
+        logging.info(f"Getting progress bar length")
+        progressBarLength = int(progress)
+        return progressBarLength
+        
 
 logging.basicConfig(filename='TideInfo.log', 
                     filemode='a', 
