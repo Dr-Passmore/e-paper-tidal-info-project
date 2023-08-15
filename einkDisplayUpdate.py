@@ -119,6 +119,7 @@ class einkUpdate:
         print("Tide info")
         
         print(f"{event}: {eventTime} with a height of {height}M")
+        print(f"{progress}%")
         
         
         epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HBlackimage))
