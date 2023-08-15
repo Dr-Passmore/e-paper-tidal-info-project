@@ -63,6 +63,7 @@ class einkUpdate:
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
         draw_other.rectangle((0, 30, epd.height, 35), fill=0)
         draw_other.rectangle((0, 30, 5, 0), fill=0)
+        draw_other.rectangle((207, 30, 212, 0), fill=0)
         
         # If high tide recorded select it provides the height, date and time recorded. Along with start date the screen has been running from
         if selection == "high":
