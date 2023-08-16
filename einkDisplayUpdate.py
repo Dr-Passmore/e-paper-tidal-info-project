@@ -97,18 +97,18 @@ class einkUpdate:
         
     def display_tide_info(event, height, eventTime, pastevent, pastheight, previousEventTime, progress):
         #212(H) x 104(V) pixel
-        progress = einkUpdate.progressBar(progress)
+        progressDraw = einkUpdate.progressBar(progress)
         logging.info("init and Clear")
         epd = epd2in13bc.EPD()
         einkUpdate.refresh_display(epd)
         
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
-        Other = Image.new('1', (epd.width, epd.height), 255)
+        HRedimage = Image.new('1', (epd.width, epd.height), 255)
         robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
         robotoblack18 = ImageFont.truetype('pic/Roboto-Black.ttf', 18)
         robotoblack14 = ImageFont.truetype('pic/Roboto-Black.ttf', 14)
         drawblack = ImageDraw.Draw(HBlackimage)
-        draw_other = ImageDraw.Draw(Other)
+        draw_other = ImageDraw.Draw(HRedimage)
         einkUpdate.loading_message(epd, robotoblack14, robotoblack18, robotoblack32)
         
         #drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
@@ -116,13 +116,14 @@ class einkUpdate:
         drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
         drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
+        draw_other.rectangle((20, 60, progressDraw, 10), fill=0)
         print("Tide info")
         
         print(f"{event}: {eventTime} with a height of {height}M")
-        print(f"{progress}%")
+        print(f"{progressDraw}%")
         
         
-        epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HBlackimage))
+        epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HRedimage))
         
         
         epd.sleep()
@@ -135,7 +136,7 @@ class einkUpdate:
     
     def progressBar(progress):
         logging.info(f"Getting progress bar length")
-        progressBarLength = int(progress)
+        progressBarLength = float(progress)
         return progressBarLength
         
 
