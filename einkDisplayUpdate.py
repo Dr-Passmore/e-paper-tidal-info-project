@@ -137,7 +137,47 @@ class einkUpdate:
     def progressBar(progress):
         logging.info(f"Getting progress bar length")
         progressBarLength = float(progress)
-        return progressBarLength
+        #212 - 30 - 30 = 152
+        progress_map = {
+            (0, 3.33): 7,
+            (3.33, 6.66): 12,
+            (6.66, 9.99): 17,
+            (9.99, 13.32): 22,
+            (13.32, 16.65): 27,
+            (16.65, 19.98): 32,
+            (19.98, 23.31): 37,
+            (23.31, 26.64): 42,
+            (26.64, 29.97): 47,
+            (29.97, 33.30): 52,
+            (33.30, 36.63): 57,
+            (36.63, 39.96): 62,
+            (39.96, 43.29): 67,
+            (43.29, 46.62): 72,
+            (46.62, 49.95): 77,
+            (49.95, 53.28): 82,
+            (53.28, 56.61): 87,
+            (56.61, 59.94): 92,
+            (59.94, 63.27): 97,
+            (63.27, 66.60): 102,
+            (66.60, 69.93): 107,
+            (69.93, 73.26): 112,
+            (73.26, 76.59): 117,
+            (76.59, 79.92): 122,
+            (79.92, 83.25): 127,
+            (83.25, 86.58): 132,
+            (86.58, 89.91): 137,
+            (89.91, 93.24): 142,
+            (93.24, 96.57): 147,
+            (96.57, 100): 152
+        }
+        for range_start, range_end in progress_map:
+            if range_start <= progressBarLength < range_end:
+                return progress_map[(range_start, range_end)]
+        
+        
+            
+        
+        return 0
         
 
 logging.basicConfig(filename='TideInfo.log', 
