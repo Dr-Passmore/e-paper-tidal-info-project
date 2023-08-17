@@ -116,11 +116,11 @@ class einkUpdate:
         drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
         drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
-        draw_other.rectangle((20, 60, progressDraw, 10), fill=0)
+        draw_other.rectangle((20, 60, 40, progressDraw), fill=0)
         print("Tide info")
         
         print(f"{event}: {eventTime} with a height of {height}M")
-        print(f"{progressDraw}%")
+        print(f"{progressDraw}")
         
         
         epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HRedimage))
