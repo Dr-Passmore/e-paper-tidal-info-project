@@ -64,7 +64,7 @@ class einkUpdate:
         draw_other.rectangle((0, 30, epd.height, 35), fill=0)
         draw_other.rectangle((0, 30, 5, 0), fill=0)
         draw_other.rectangle((207, 30, 212, 0), fill=0)
-        draw_other.rectangle((0, 99, 212, 104))
+        draw_other.rectangle((0, 99, 212, 104), fill=0)
         draw_other.rectangle((0, 31, 5, 104), fill=0)
         draw_other.rectangle((207, 0, 212, 104), fill=0)
         
