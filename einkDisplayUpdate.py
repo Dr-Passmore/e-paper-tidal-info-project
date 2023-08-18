@@ -57,7 +57,7 @@ class einkUpdate:
         lowestTideDate = config.get('Records', 'lowest tide date')
         
         # Title of 'Records' added at top of layout
-        drawLoadBlack.text((30, 0), f'Records:', font=robotoblack32, fill=0)
+        drawLoadBlack.text((30, 0), f'Loading:', font=robotoblack32, fill=0)
         
         # Draws red borders
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
@@ -71,7 +71,7 @@ class einkUpdate:
             daterecorded = highest_tide_datetime.strftime("%Y-%m-%d")
             timerecorded = highest_tide_datetime.strftime("%H:%M:%S")
             drawLoadBlack.text((2, 35), f'High Tide Height: {float(highHeight):.2f} m', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 55), f'Recorded On: {daterecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 55), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 75), f'At: {timerecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack14, fill=0)
         
@@ -81,7 +81,7 @@ class einkUpdate:
             daterecorded = lowest_tide_datetime.strftime("%Y-%m-%d")
             timerecorded = lowest_tide_datetime.strftime("%H:%M:%S")
             drawLoadBlack.text((2, 35), f'Low Tide Height: {float(lowHeight):.2f} m', font=robotoblack18, fill=0)
-            drawLoadBlack.text((2, 55), f'Recorded On: {daterecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((2, 55), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 75), f'At: {timerecorded}', font=robotoblack18, fill=0)
             drawLoadBlack.text((2, 90), f'Recording Since {startDate}', font=robotoblack14, fill=0)
         
@@ -116,7 +116,7 @@ class einkUpdate:
         drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
         drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
-        draw_other.rectangle((20, 60, 40, progressDraw), fill=0)
+        draw_other.rectangle((20, 10, 30 + progressDraw, 30), fill=0)
         print("Tide info")
         
         print(f"{event}: {eventTime} with a height of {height}M")
