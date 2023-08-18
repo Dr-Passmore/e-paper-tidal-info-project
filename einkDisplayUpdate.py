@@ -32,7 +32,7 @@ class einkUpdate:
         epd.Clear()
         time.sleep(1)
     
-    def loading_message(epd, robotoblack14, robotoblack18, robotoblack32):
+    def loading_message(epd, robotoblack14, robotoblack18, robotoblack24, robotoblack32):
         
         #212(W) x 104(H) pixel
         logging.info("loading message - Records")
@@ -57,7 +57,7 @@ class einkUpdate:
         lowestTideDate = config.get('Records', 'lowest tide date')
         
         # Title of 'Records' added at top of layout
-        drawLoadBlack.text((30, 0), f'Loading:', font=robotoblack32, fill=0)
+        drawLoadBlack.text((30, 0), f'Loading:', font=robotoblack24, fill=0)
         
         # Draws red borders
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
@@ -105,18 +105,19 @@ class einkUpdate:
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
         HRedimage = Image.new('1', (epd.width, epd.height), 255)
         robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
+        robotoblack24 = ImageFont.truetype('pic/Roboto-Black.ttf', 24)
         robotoblack18 = ImageFont.truetype('pic/Roboto-Black.ttf', 18)
         robotoblack14 = ImageFont.truetype('pic/Roboto-Black.ttf', 14)
         drawblack = ImageDraw.Draw(HBlackimage)
         draw_other = ImageDraw.Draw(HRedimage)
-        einkUpdate.loading_message(epd, robotoblack14, robotoblack18, robotoblack32)
+        einkUpdate.loading_message(epd, robotoblack14, robotoblack18, robotoblack24, robotoblack32)
         
         #drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
         drawblack.text((2, 0), f'event: {event}', font = robotoblack18, fill = 0)
         drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
         drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
-        draw_other.rectangle((2, 10, 30 , 30 + progressDraw), fill=0)
+        draw_other.rectangle((20, 0, 30 , 30 + progressDraw), fill=0)
         print("Tide info")
         
         print(f"{event}: {eventTime} with a height of {height}M")
