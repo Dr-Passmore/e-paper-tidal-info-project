@@ -57,7 +57,7 @@ class einkUpdate:
         lowestTideDate = config.get('Records', 'lowest tide date')
         
         # Title of 'Records' added at top of layout
-        drawLoadBlack.text((30, 0), f'Loading:', font=robotoblack24, fill=0)
+        drawLoadBlack.text((45, 5), f'Loading:', font=robotoblack24, fill=0)
         
         # Draws red borders
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
@@ -117,7 +117,7 @@ class einkUpdate:
         drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
         drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
-        draw_other.rectangle((20, 0, 30 , 30 + progressDraw), fill=0)
+        draw_other.rectangle((10, 0, 30 , progressDraw), fill=0)
         print("Tide info")
         
         print(f"{event}: {eventTime} with a height of {height}M")
