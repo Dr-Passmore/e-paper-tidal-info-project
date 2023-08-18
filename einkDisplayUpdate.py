@@ -66,7 +66,7 @@ class einkUpdate:
         draw_other.rectangle((207, 30, 212, 0), fill=0)
         draw_other.rectangle((0, 99, 212, 104))
         draw_other.rectangle((0, 31, 5, 104), fill=0)
-        draw_other.rectangle((207, 31, 212, 104), fill=0)
+        draw_other.rectangle((207, 0, 212, 104), fill=0)
         
         
         # If high tide recorded select it provides the height, date and time recorded. Along with start date the screen has been running from
@@ -75,9 +75,9 @@ class einkUpdate:
             daterecorded = highest_tide_datetime.strftime("%Y-%m-%d")
             timerecorded = highest_tide_datetime.strftime("%H:%M:%S")
             drawLoadBlack.text((5, 35), f'Highest Height: {float(highHeight):.2f} m', font=robotoblack18, fill=0)
-            drawLoadBlack.text((5, 55), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((5, 75), f'At: {timerecorded}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((5, 85), f'Recording Since {startDate}', font=robotoblack14, fill=0)
+            drawLoadBlack.text((5, 50), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((5, 65), f'At: {timerecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((5, 80), f'Recording Since {startDate}', font=robotoblack14, fill=0)
         
         # If low tide recorded select it provides the height, date and time recorded. Along with start date the screen has been running from
         else: 
