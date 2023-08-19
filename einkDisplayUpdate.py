@@ -122,24 +122,24 @@ class einkUpdate:
         #drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
         
-        drawblack.text((2, 20), 'Low', font = robotoblack14, fill=0)
-        drawblack.text((172, 20), 'High', font=robotoblack14, fill=0)
+        drawblack.text((10, 20), 'Low', font = robotoblack14, fill=0)
+        drawblack.text((167, 20), 'High', font=robotoblack14, fill=0)
         draw_other.rectangle((10, 70, 30 + progressDraw , 40), fill=0)
         print("Tide info")
         
         if event == 'LowWater':
             drawblack.text((40, 5), 'Tide Going Out', font=robotoblack18, fill=0)
-            drawblack.text((10, 80), f'{height:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((10, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((10, 70), f'{eventTime}', font=robotoblack14, fill = 0)
-            drawblack.text((172,80), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
-            drawblack.text((172, 70), f'{previousEventTime}', font=robotoblack14, fill = 0)
+            drawblack.text((167,85), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
+            drawblack.text((167, 70), f'{previousEventTime}', font=robotoblack14, fill = 0)
             
         else:
             drawblack.text((40, 5), 'Tide Coming In', font=robotoblack18, fill=0)
-            drawblack.text((10, 80), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((10, 85), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((10, 70), f'{previousEventTime}', font=robotoblack14, fill = 0)
-            drawblack.text((172, 80), f'{height:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((172, 70), f'{eventTime}', font=robotoblack14, fill = 0)
+            drawblack.text((167, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((167, 70), f'{eventTime}', font=robotoblack14, fill = 0)
             
         
         print(f"{event}: {eventTime} with a height of {height}M")
