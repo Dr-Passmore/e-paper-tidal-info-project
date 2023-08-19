@@ -75,9 +75,9 @@ class einkUpdate:
             daterecorded = highest_tide_datetime.strftime("%Y-%m-%d")
             timerecorded = highest_tide_datetime.strftime("%H:%M:%S")
             drawLoadBlack.text((5, 35), f'Highest Height: {float(highHeight):.2f} m', font=robotoblack18, fill=0)
-            drawLoadBlack.text((5, 50), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((5, 65), f'At: {timerecorded[0:5]}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((5, 80), f'Recording Since {startDate}', font=robotoblack14, fill=0)
+            drawLoadBlack.text((5, 52), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((5, 67), f'At: {timerecorded[0:5]}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((5, 82), f'Recording Since {startDate}', font=robotoblack14, fill=0)
         
         # If low tide recorded select it provides the height, date and time recorded. Along with start date the screen has been running from
         else: 
@@ -85,9 +85,9 @@ class einkUpdate:
             daterecorded = lowest_tide_datetime.strftime("%Y-%m-%d")
             timerecorded = lowest_tide_datetime.strftime("%H:%M:%S")
             drawLoadBlack.text((5, 35), f'Lowest Height: {float(lowHeight):.2f} m', font=robotoblack18, fill=0)
-            drawLoadBlack.text((5, 50), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((5, 65), f'At: {timerecorded}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((5, 80), f'Recording Since {startDate}', font=robotoblack14, fill=0)
+            drawLoadBlack.text((5, 52), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((5, 67), f'At: {timerecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((5, 82), f'Recording Since {startDate}', font=robotoblack14, fill=0)
         
         # Updates the display
         epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(Other)) 
@@ -120,7 +120,8 @@ class einkUpdate:
         drawblack.text((2, 0), f'event: {event}', font = robotoblack18, fill = 0)
         drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
         drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
-        
+        drawblack.text((2, 35), 'Low', font = robotoblack14, fill=0)
+        drawblack.text((172, 35), 'High', font=robotoblack14, fill=0)
         draw_other.rectangle((10, 70, 30 + progressDraw , 40), fill=0)
         print("Tide info")
         
