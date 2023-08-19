@@ -120,10 +120,18 @@ class einkUpdate:
         drawblack.text((2, 0), f'event: {event}', font = robotoblack18, fill = 0)
         drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
         drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
-        drawblack.text((2, 35), 'Low', font = robotoblack14, fill=0)
-        drawblack.text((172, 35), 'High', font=robotoblack14, fill=0)
+        
+        
+        drawblack.text((2, 30), 'Low', font = robotoblack14, fill=0)
+        drawblack.text((172, 30), 'High', font=robotoblack14, fill=0)
         draw_other.rectangle((10, 70, 30 + progressDraw , 40), fill=0)
         print("Tide info")
+        
+        if event == 'LowWater':
+            drawblack.text((20, 10), 'Tide Going Out', font=robotoblack18, fill=0)
+            
+        else:
+            drawblack.text((20, 10), 'Tide Going In', font=robotoblack18, fill=0)
         
         print(f"{event}: {eventTime} with a height of {height}M")
         print(f"{progressDraw}")
