@@ -117,9 +117,9 @@ class einkUpdate:
         einkUpdate.loading_message(epd, robotoblack14, robotoblack18, robotoblack24, robotoblack32)
         
         #drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
-        drawblack.text((2, 0), f'event: {event}', font = robotoblack18, fill = 0)
-        drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
-        drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
+        #drawblack.text((2, 0), f'event: {event}', font = robotoblack18, fill = 0)
+        #drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
+        #drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
         
         drawblack.text((2, 30), 'Low', font = robotoblack14, fill=0)
@@ -128,10 +128,13 @@ class einkUpdate:
         print("Tide info")
         
         if event == 'LowWater':
-            drawblack.text((20, 10), 'Tide Going Out', font=robotoblack18, fill=0)
-            
+            drawblack.text((40, 10), 'Tide Going Out', font=robotoblack18, fill=0)
+            drawblack.text((10, 100), f'{height:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((10, 80), f'{eventTime}', font=robotoblack14, fill = 0)
         else:
-            drawblack.text((20, 10), 'Tide Going In', font=robotoblack18, fill=0)
+            drawblack.text((40, 10), 'Tide Coming In', font=robotoblack18, fill=0)
+            drawblack.text((10, 100), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((10, 80), f'{previousEventTime}', font=robotoblack14, fill = 0)
         
         print(f"{event}: {eventTime} with a height of {height}M")
         print(f"{progressDraw}")
