@@ -124,12 +124,13 @@ class einkUpdate:
         
         drawblack.text((10, 20), 'Low', font = robotoblack14, fill=0)
         drawblack.text((167, 20), 'High', font=robotoblack14, fill=0)
-        #draw_other.rectangle((10, 70, 30 + progressDraw , 40), fill=0)
+        draw_other.rectangle((10, 70, 30 + progressDraw , 40), fill=0)
+        drawblack.rectangle((9, 39, 10, 71), fill=0)
         print("Tide info")
         
-        chevron_y = 45  # Y-coordinate for the chevron pattern
-        chevron_height = 20  # Height of the chevron pattern
-        chevron_width = 5  
+        #chevron_y = 45  # Y-coordinate for the chevron pattern
+        #chevron_height = 20  # Height of the chevron pattern
+        #chevron_width = 5  
         
         if event == 'LowWater':
             drawblack.text((40, 5), 'Tide Going Out', font=robotoblack18, fill=0)
@@ -145,12 +146,12 @@ class einkUpdate:
             drawblack.text((167, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((167, 70), f'{eventTime}', font=robotoblack14, fill = 0)
             
-            for i in range(0, progressDraw, chevron_width):
+            '''for i in range(0, progressDraw, chevron_width):
                 draw_other.polygon([(212 - 10 - i, chevron_y),
                 (212 - 60 - i - chevron_width // 2, chevron_y + chevron_height),
                 (212 - 60 - i - chevron_width, chevron_y)],
                 fill=0)
-            
+            '''
         
         print(f"{event}: {eventTime} with a height of {height}M")
         print(f"{progressDraw}")
