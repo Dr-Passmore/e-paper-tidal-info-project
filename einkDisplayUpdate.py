@@ -126,6 +126,9 @@ class einkUpdate:
         drawblack.text((167, 20), 'High', font=robotoblack14, fill=0)
         draw_other.rectangle((10, 70, 30 + progressDraw , 40), fill=0)
         drawblack.rectangle((9, 39, 10, 71), fill=0)
+        drawblack.rectangle((182, 39, 183, 71), fill=0)
+        drawblack.rectangle((9, 70, 183, 71), fill=0)
+        drawblack.rectangle((9, 39, 183, 40), fill=0)
         print("Tide info")
         
         #chevron_y = 45  # Y-coordinate for the chevron pattern
