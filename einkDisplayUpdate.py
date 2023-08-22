@@ -146,6 +146,14 @@ class einkUpdate:
             drawblack.text((167,85), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
             drawblack.text((167, 70), f'{previousEventTime}', font=robotoblack14, fill = 0)
             
+            # Arrow
+            
+            draw_other.rectangle((81, 80, 90, 90), fill=0)
+            drawblack.rectangle((91, 80, 100, 90), fill=0)
+            draw_other.rectangle((101, 80, 110, 90), fill=0)
+            drawblack.rectangle((111, 80, 120, 90), fill=0)
+            draw_other.rectangle((121, 80, 130, 90), fill=0)
+            
         else:
             drawblack.text((40, 5), 'Tide Coming In', font=robotoblack18, fill=0)
             drawblack.text((10, 85), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
@@ -156,9 +164,12 @@ class einkUpdate:
             
             # Arrow
             
-            drawblack.rectangle((90, 90, 100, 100), fill=0)
-            draw_other.rectangle((101, 90, 110, 100), fill=0)
-            drawblack.rectangle((111, 90, 120, 100), fill=0)
+            #212 / 2 = 106
+            draw_other.rectangle((81, 80, 90, 90), fill=0)
+            drawblack.rectangle((91, 80, 100, 90), fill=0)
+            draw_other.rectangle((101, 80, 110, 90), fill=0)
+            drawblack.rectangle((111, 80, 120, 90), fill=0)
+            draw_other.rectangle((121, 80, 130, 90), fill=0)
             
             
             '''for i in range(0, progressDraw, chevron_width):
