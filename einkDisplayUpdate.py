@@ -127,7 +127,7 @@ class einkUpdate:
         
         # Progress Bar
         draw_other.rectangle((30, 70, 30 + progressDraw , 40), fill=0)
-        drawblack.rectangle((29, 39, 10, 71), fill=0)
+        drawblack.rectangle((29, 39, 30, 71), fill=0)
         drawblack.rectangle((182, 39, 183, 71), fill=0)
         drawblack.rectangle((29, 70, 183, 71), fill=0)
         drawblack.rectangle((29, 39, 183, 40), fill=0)
