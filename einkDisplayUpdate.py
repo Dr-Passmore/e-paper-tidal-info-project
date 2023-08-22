@@ -154,6 +154,13 @@ class einkUpdate:
             drawblack.text((167, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((167, 70), f'{eventTime}', font=robotoblack14, fill = 0)
             
+            # Arrow
+            
+            drawblack.rectangle((90, 90, 100, 100), fill=0)
+            draw_other.rectangle((101, 90, 110, 100), fill=0)
+            drawblack.rectangle((111, 90, 120, 100), fill=0)
+            
+            
             '''for i in range(0, progressDraw, chevron_width):
                 draw_other.polygon([(212 - 10 - i, chevron_y),
                 (212 - 60 - i - chevron_width // 2, chevron_y + chevron_height),
