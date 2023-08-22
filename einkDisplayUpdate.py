@@ -57,7 +57,7 @@ class einkUpdate:
         lowestTideDate = config.get('Records', 'lowest tide date')
         
         # Title of 'Records' added at top of layout
-        drawLoadBlack.text((50, 2), f'Loading:', font=robotoblack24, fill=0)
+        drawLoadBlack.text((50, 2), f'Record:', font=robotoblack24, fill=0)
         
         # Draws red borders
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
@@ -122,8 +122,8 @@ class einkUpdate:
         #drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
         
         
-        drawblack.text((10, 20), 'Low', font = robotoblack14, fill=0)
-        drawblack.text((167, 20), 'High', font=robotoblack14, fill=0)
+        drawblack.text((10, 25), 'Low', font = robotoblack14, fill=0)
+        drawblack.text((167, 25), 'High', font=robotoblack14, fill=0)
         
         # Progress Bar
         draw_other.rectangle((30, 70, 30 + progressDraw , 40), fill=0)
@@ -141,7 +141,7 @@ class einkUpdate:
         if event == 'LowWater':
             drawblack.text((40, 5), 'Tide Going Out', font=robotoblack18, fill=0)
             drawblack.text((10, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((10, 70), f'{eventTime}', font=robotoblack14, fill = 0)
+            drawblack.text((10, 75), f'{eventTime}', font=robotoblack14, fill = 0)
             draw_other.text((10, 15), 'Next', font=robotoblack14, fill=0)
             drawblack.text((167,85), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
             drawblack.text((167, 70), f'{previousEventTime}', font=robotoblack14, fill = 0)
@@ -149,7 +149,7 @@ class einkUpdate:
         else:
             drawblack.text((40, 5), 'Tide Coming In', font=robotoblack18, fill=0)
             drawblack.text((10, 85), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((10, 70), f'{previousEventTime}', font=robotoblack14, fill = 0)
+            drawblack.text((10, 75), f'{previousEventTime}', font=robotoblack14, fill = 0)
             draw_other.text((167, 15), 'Next', font=robotoblack14, fill=0)
             drawblack.text((167, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((167, 70), f'{eventTime}', font=robotoblack14, fill = 0)
