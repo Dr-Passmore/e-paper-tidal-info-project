@@ -124,11 +124,14 @@ class einkUpdate:
         
         drawblack.text((10, 20), 'Low', font = robotoblack14, fill=0)
         drawblack.text((167, 20), 'High', font=robotoblack14, fill=0)
-        draw_other.rectangle((10, 70, 30 + progressDraw , 40), fill=0)
-        drawblack.rectangle((9, 39, 10, 71), fill=0)
+        
+        # Progress Bar
+        draw_other.rectangle((30, 70, 30 + progressDraw , 40), fill=0)
+        drawblack.rectangle((29, 39, 10, 71), fill=0)
         drawblack.rectangle((182, 39, 183, 71), fill=0)
-        drawblack.rectangle((9, 70, 183, 71), fill=0)
-        drawblack.rectangle((9, 39, 183, 40), fill=0)
+        drawblack.rectangle((29, 70, 183, 71), fill=0)
+        drawblack.rectangle((29, 39, 183, 40), fill=0)
+        
         print("Tide info")
         
         #chevron_y = 45  # Y-coordinate for the chevron pattern
@@ -139,6 +142,7 @@ class einkUpdate:
             drawblack.text((40, 5), 'Tide Going Out', font=robotoblack18, fill=0)
             drawblack.text((10, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((10, 70), f'{eventTime}', font=robotoblack14, fill = 0)
+            draw_other.text((10, 15), 'Next', font=robotoblack14, fill=0)
             drawblack.text((167,85), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
             drawblack.text((167, 70), f'{previousEventTime}', font=robotoblack14, fill = 0)
             
@@ -146,6 +150,7 @@ class einkUpdate:
             drawblack.text((40, 5), 'Tide Coming In', font=robotoblack18, fill=0)
             drawblack.text((10, 85), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((10, 70), f'{previousEventTime}', font=robotoblack14, fill = 0)
+            draw_other.text((167, 15), 'Next', font=robotoblack14, fill=0)
             drawblack.text((167, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((167, 70), f'{eventTime}', font=robotoblack14, fill = 0)
             
@@ -210,10 +215,6 @@ class einkUpdate:
         for range_start, range_end in progress_map:
             if range_start <= progressBarLength < range_end:
                 return progress_map[(range_start, range_end)]
-        
-        
-            
-        
         return 0
         
 
