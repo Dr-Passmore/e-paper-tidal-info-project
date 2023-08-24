@@ -148,11 +148,15 @@ class einkUpdate:
             
             # Arrow
             
+            drawblack.point(())
+            drawblack.polygon([(61, 85), (70, 70), (70, 100)], fill=0)
             draw_other.rectangle((81, 80, 90, 90), fill=0)
             drawblack.rectangle((91, 80, 100, 90), fill=0)
             draw_other.rectangle((101, 80, 110, 90), fill=0)
             drawblack.rectangle((111, 80, 120, 90), fill=0)
             draw_other.rectangle((121, 80, 130, 90), fill=0)
+            drawblack.rectangle((131, 80, 140, 90), fill=0)
+            
             
         else:
             drawblack.text((40, 5), 'Tide Coming In', font=robotoblack18, fill=0)
@@ -165,11 +169,13 @@ class einkUpdate:
             # Arrow
             
             #212 / 2 = 106
+            drawblack.rectangle((71, 80, 80, 90), fill=0)
             draw_other.rectangle((81, 80, 90, 90), fill=0)
             drawblack.rectangle((91, 80, 100, 90), fill=0)
             draw_other.rectangle((101, 80, 110, 90), fill=0)
             drawblack.rectangle((111, 80, 120, 90), fill=0)
             draw_other.rectangle((121, 80, 130, 90), fill=0)
+            drawblack.polygon([(61, 85), (70, 70), (70, 100)], fill=0)
             
             
             '''for i in range(0, progressDraw, chevron_width):
