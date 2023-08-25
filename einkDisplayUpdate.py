@@ -16,7 +16,9 @@ class einkUpdate:
         pass
     
     def error_display(e):
-        
+        print(type(e))
+        e = str(e)
+        print(type(e))
         epd = epd2in13bc.EPD()
         einkUpdate.refresh_display(epd)
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
