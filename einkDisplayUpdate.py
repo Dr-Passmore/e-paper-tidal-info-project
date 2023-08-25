@@ -116,12 +116,6 @@ class einkUpdate:
         draw_other = ImageDraw.Draw(HRedimage)
         einkUpdate.loading_message(epd, robotoblack14, robotoblack18, robotoblack24, robotoblack32)
         
-        #drawblack.text((2, 0), 'hello world', font = robotoblack32, fill = 0)
-        #drawblack.text((2, 0), f'event: {event}', font = robotoblack18, fill = 0)
-        #drawblack.text((2, 20), f'height: {height:.2f}', font = robotoblack18, fill = 0)
-        #drawblack.text((2, 40), f'Time: {eventTime}', font = robotoblack18, fill = 0)
-        
-        
         drawblack.text((10, 25), 'Low', font = robotoblack14, fill=0)
         drawblack.text((167, 25), 'High', font=robotoblack14, fill=0)
         
@@ -140,15 +134,14 @@ class einkUpdate:
         
         if event == 'LowWater':
             drawblack.text((40, 5), 'Tide Going Out', font=robotoblack18, fill=0)
-            drawblack.text((10, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((10, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((10, 75), f'{eventTime}', font=robotoblack14, fill = 0)
             draw_other.text((10, 15), 'Next', font=robotoblack14, fill=0)
-            drawblack.text((167,85), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
-            drawblack.text((167, 70), f'{previousEventTime}', font=robotoblack14, fill = 0)
+            drawblack.text((167,90), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
+            drawblack.text((167, 75), f'{previousEventTime}', font=robotoblack14, fill = 0)
             
             # Arrow
             
-            drawblack.point(())
             drawblack.polygon([(61, 85), (70, 70), (70, 100)], fill=0)
             draw_other.rectangle((81, 80, 90, 90), fill=0)
             drawblack.rectangle((91, 80, 100, 90), fill=0)
@@ -157,14 +150,13 @@ class einkUpdate:
             draw_other.rectangle((121, 80, 130, 90), fill=0)
             drawblack.rectangle((131, 80, 140, 90), fill=0)
             
-            
         else:
             drawblack.text((40, 5), 'Tide Coming In', font=robotoblack18, fill=0)
-            drawblack.text((10, 85), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((10, 90), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((10, 75), f'{previousEventTime}', font=robotoblack14, fill = 0)
             draw_other.text((167, 15), 'Next', font=robotoblack14, fill=0)
-            drawblack.text((167, 85), f'{height:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((167, 70), f'{eventTime}', font=robotoblack14, fill = 0)
+            drawblack.text((167, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((167, 75), f'{eventTime}', font=robotoblack14, fill = 0)
             
             # Arrow
             
@@ -175,25 +167,14 @@ class einkUpdate:
             draw_other.rectangle((101, 80, 110, 90), fill=0)
             drawblack.rectangle((111, 80, 120, 90), fill=0)
             draw_other.rectangle((121, 80, 130, 90), fill=0)
-            drawblack.polygon([(61, 85), (70, 70), (70, 100)], fill=0)
-            
-            
-            '''for i in range(0, progressDraw, chevron_width):
-                draw_other.polygon([(212 - 10 - i, chevron_y),
-                (212 - 60 - i - chevron_width // 2, chevron_y + chevron_height),
-                (212 - 60 - i - chevron_width, chevron_y)],
-                fill=0)
-            '''
+            drawblack.polygon([(150, 85), (130, 70), (130, 100)], fill=0)
         
         print(f"{event}: {eventTime} with a height of {height}M")
         print(f"{progressDraw}")
         
-        
         epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HRedimage))
         
-        
         epd.sleep()
-        
         
         updateCompleted = "e-ink screen refresh has succesfully completed"
         logging.info(updateCompleted)
@@ -241,7 +222,6 @@ class einkUpdate:
                 return progress_map[(range_start, range_end)]
         return 0
         
-
 logging.basicConfig(filename='TideInfo.log', 
                     filemode='a', 
                     level=logging.INFO,
