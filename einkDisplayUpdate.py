@@ -57,7 +57,7 @@ class einkUpdate:
         lowestTideDate = config.get('Records', 'lowest tide date')
         
         # Title of 'Records' added at top of layout
-        drawLoadBlack.text((50, 2), f'Record:', font=robotoblack24, fill=0)
+        drawLoadBlack.text((60, 2), f'Record:', font=robotoblack24, fill=0)
         
         # Draws red borders
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
@@ -74,20 +74,20 @@ class einkUpdate:
             highest_tide_datetime = datetime.strptime(highestTideDate, "%Y-%m-%d %H:%M:%S")
             daterecorded = highest_tide_datetime.strftime("%Y-%m-%d")
             timerecorded = highest_tide_datetime.strftime("%H:%M:%S")
-            drawLoadBlack.text((8, 35), f'Highest Height: {float(highHeight):.2f} m', font=robotoblack18, fill=0)
-            drawLoadBlack.text((8, 52), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((8, 67), f'At: {timerecorded[0:5]}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((8, 82), f'Recording Since {startDate}', font=robotoblack14, fill=0)
+            drawLoadBlack.text((15, 35), f'Highest Height: {float(highHeight):.2f} m', font=robotoblack18, fill=0)
+            drawLoadBlack.text((15, 52), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((15, 67), f'At: {timerecorded[0:5]}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((15, 82), f'Recording Since {startDate}', font=robotoblack14, fill=0)
         
         # If low tide recorded select it provides the height, date and time recorded. Along with start date the screen has been running from
         else: 
             lowest_tide_datetime = datetime.strptime(lowestTideDate, "%Y-%m-%d %H:%M:%S")
             daterecorded = lowest_tide_datetime.strftime("%Y-%m-%d")
             timerecorded = lowest_tide_datetime.strftime("%H:%M:%S")
-            drawLoadBlack.text((8, 35), f'Lowest Height: {float(lowHeight):.2f} m', font=robotoblack18, fill=0)
-            drawLoadBlack.text((8, 52), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((8, 67), f'At: {timerecorded}', font=robotoblack18, fill=0)
-            drawLoadBlack.text((8, 82), f'Recording Since {startDate}', font=robotoblack14, fill=0)
+            drawLoadBlack.text((15, 35), f'Lowest Height: {float(lowHeight):.2f} m', font=robotoblack18, fill=0)
+            drawLoadBlack.text((15, 52), f'Recorded: {daterecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((15, 67), f'At: {timerecorded}', font=robotoblack18, fill=0)
+            drawLoadBlack.text((15, 82), f'Recording Since {startDate}', font=robotoblack14, fill=0)
         
         # Updates the display
         epd.display(epd.getbuffer(LoadingBlackimage), epd.getbuffer(Other)) 
