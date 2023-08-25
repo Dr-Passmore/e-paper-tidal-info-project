@@ -18,6 +18,7 @@ class einkUpdate:
     def error_display(e):
         print(f"error: {e}")
         epd = epd2in13bc.EPD()
+        einkUpdate.refresh_display(epd)
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
         HRedimage = Image.new('1', (epd.height, epd.width), 255)
         robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
