@@ -223,7 +223,7 @@ class einkUpdate:
         return 0
         
     def updateTimeDisplay(time):
-        if int(time[0:1]) < 12:
+        if int(time[0:2]) < 12:
             time = time + "AM"
         else:
             time = time + "PM"
@@ -237,3 +237,4 @@ logging.basicConfig(filename='TideInfo.log',
 
 if __name__ == "__main__":
     tide_display = einkUpdate()
+    
