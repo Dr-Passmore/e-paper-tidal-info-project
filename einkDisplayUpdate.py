@@ -19,11 +19,15 @@ class einkUpdate:
         print(f"error: {e}")
         epd = epd2in13bc.EPD()
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
-        
+        HRedimage = Image.new('1', (epd.height, epd.width), 255)
         robotoblack32 = ImageFont.truetype('pic/Roboto-Black.ttf', 32)
+        robotoblack14 = ImageFont.truetype('pic/Roboto-Black.ttf', 14)
         drawblack = ImageDraw.Draw(HBlackimage)
+        draw_other = ImageDraw.Draw(HRedimage)
+        drawblack.text((60, 0), f'{e}', font = robotoblack32, fill = 0)
+        draw_other.text((10, 65), "ERROR!", font=robotoblack14, fill=0)
         
-        drawblack.text((2, 0), f'hello world {e}', font = robotoblack32, fill = 1)
+        epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HRedimage))
         epd.sleep()
     
     def refresh_display(epd):
