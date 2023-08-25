@@ -25,8 +25,17 @@ class einkUpdate:
         robotoblack14 = ImageFont.truetype('pic/Roboto-Black.ttf', 14)
         drawblack = ImageDraw.Draw(HBlackimage)
         draw_other = ImageDraw.Draw(HRedimage)
-        drawblack.text((10, 65), f'{e}', font = robotoblack14, fill = 0)
-        draw_other.text((60, 10), "ERROR!", font=robotoblack32, fill=0)
+        drawblack.text((0, 65), f'{e}', font = robotoblack14, fill = 0)
+        draw_other.text((55, 0), "ERROR!", font=robotoblack32, fill=0)
+        
+        draw_other.rectangle((0, 0, epd.height, 5), fill=0)
+        draw_other.rectangle((0, 30, epd.height, 35), fill=0)
+        draw_other.rectangle((0, 30, 5, 0), fill=0)
+        draw_other.rectangle((207, 30, 212, 0), fill=0)
+        draw_other.rectangle((0, 99, 212, 104), fill=0)
+        draw_other.rectangle((0, 31, 5, 104), fill=0)
+        draw_other.rectangle((207, 0, 212, 104), fill=0)
+        
         
         epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HRedimage))
         epd.sleep()
