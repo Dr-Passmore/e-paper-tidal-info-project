@@ -116,7 +116,7 @@ class einkUpdate:
         draw_other = ImageDraw.Draw(HRedimage)
         einkUpdate.loading_message(epd, robotoblack14, robotoblack18, robotoblack24, robotoblack32)
         
-        drawblack.text((10, 25), 'Low', font = robotoblack14, fill=0)
+        drawblack.text((5, 25), 'Low', font = robotoblack14, fill=0)
         drawblack.text((167, 25), 'High', font=robotoblack14, fill=0)
         
         # Progress Bar
@@ -134,15 +134,15 @@ class einkUpdate:
         
         if event == 'LowWater':
             drawblack.text((40, 5), 'Tide Going Out', font=robotoblack18, fill=0)
-            drawblack.text((10, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((10, 75), f'{eventTime}', font=robotoblack14, fill = 0)
-            draw_other.text((10, 15), 'Next', font=robotoblack14, fill=0)
-            drawblack.text((167,90), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
-            drawblack.text((167, 75), f'{previousEventTime}', font=robotoblack14, fill = 0)
+            drawblack.text((5, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((5, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
+            draw_other.text((5, 15), 'Next', font=robotoblack14, fill=0)
+            drawblack.text((157,90), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
+            drawblack.text((157, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
             
             # Arrow
             
-            drawblack.polygon([(61, 85), (70, 70), (70, 100)], fill=0)
+            drawblack.polygon([(61, 85), (80, 70), (80, 100)], fill=0)
             draw_other.rectangle((81, 80, 90, 90), fill=0)
             drawblack.rectangle((91, 80, 100, 90), fill=0)
             draw_other.rectangle((101, 80, 110, 90), fill=0)
@@ -152,11 +152,11 @@ class einkUpdate:
             
         else:
             drawblack.text((40, 5), 'Tide Coming In', font=robotoblack18, fill=0)
-            drawblack.text((10, 90), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((10, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
+            drawblack.text((5, 90), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((5, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
             draw_other.text((167, 15), 'Next', font=robotoblack14, fill=0)
-            drawblack.text((167, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((167, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
+            drawblack.text((157, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((157, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
             
             # Arrow
             
@@ -224,9 +224,9 @@ class einkUpdate:
         
     def updateTimeDisplay(time):
         if int(time[0:1]) < 12:
-            time = time + " AM"
+            time = time + "AM"
         else:
-            time = time + " PM"
+            time = time + "PM"
         return time
         
 logging.basicConfig(filename='TideInfo.log', 
