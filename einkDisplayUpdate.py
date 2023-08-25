@@ -142,7 +142,7 @@ class einkUpdate:
             
             # Arrow
             
-            drawblack.polygon([(61, 85), (80, 71), (80, 99)], fill=0)
+            drawblack.polygon([(61, 85), (80, 73), (80, 97)], fill=0)
             draw_other.rectangle((81, 80, 90, 90), fill=0)
             drawblack.rectangle((91, 80, 100, 90), fill=0)
             draw_other.rectangle((101, 80, 110, 90), fill=0)
@@ -167,7 +167,7 @@ class einkUpdate:
             draw_other.rectangle((101, 80, 110, 90), fill=0)
             drawblack.rectangle((111, 80, 120, 90), fill=0)
             draw_other.rectangle((121, 80, 130, 90), fill=0)
-            drawblack.polygon([(150, 85), (130, 71), (130, 99)], fill=0)
+            drawblack.polygon([(150, 85), (130, 73), (130, 97)], fill=0)
         
         print(f"{event}: {eventTime} with a height of {height}M")
         print(f"{progressDraw}")
