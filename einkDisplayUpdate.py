@@ -57,7 +57,7 @@ class einkUpdate:
         lowestTideDate = config.get('Records', 'lowest tide date')
         
         # Title of 'Records' added at top of layout
-        drawLoadBlack.text((60, 2), f'Record:', font=robotoblack24, fill=0)
+        drawLoadBlack.text((65, 2), f'Record:', font=robotoblack24, fill=0)
         
         # Draws red borders
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
@@ -137,8 +137,8 @@ class einkUpdate:
             drawblack.text((5, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((5, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
             #draw_other.text((5, 15), 'Next', font=robotoblack14, fill=0)
-            drawblack.text((157,90), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
-            drawblack.text((157, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
+            drawblack.text((155,90), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
+            drawblack.text((155, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
             
             # Arrow
             
@@ -155,8 +155,8 @@ class einkUpdate:
             drawblack.text((5, 90), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((5, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
             #draw_other.text((167, 15), 'Next', font=robotoblack14, fill=0)
-            drawblack.text((157, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((157, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
+            drawblack.text((155, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((155, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
             
             # Arrow
             
