@@ -16,20 +16,20 @@ class einkUpdate:
         pass
     
     def error_display(e):
-        print(type(e))
+        
         e = str(e)
-        print(type(e))
+        
         epd = epd2in13bc.EPD()
         einkUpdate.refresh_display(epd)
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
         HRedimage = Image.new('1', (epd.height, epd.width), 255)
         robotoblack28 = ImageFont.truetype('pic/Roboto-Black.ttf', 28)
-        robotoblack14 = ImageFont.truetype('pic/Roboto-Black.ttf', 14)
+        robotoblack18 = ImageFont.truetype('pic/Roboto-Black.ttf', 18)
         drawblack = ImageDraw.Draw(HBlackimage)
         draw_other = ImageDraw.Draw(HRedimage)
-        drawblack.text((5, 45), f'{e[0:16]}', font = robotoblack14, fill = 0)
-        drawblack.text((5, 55), f'{e[16:]}', font = robotoblack14, fill = 0)
-        draw_other.text((55, 0), "ERROR!", font=robotoblack28, fill=0)
+        drawblack.text((15, 45), f'{e[0:16]}', font = robotoblack18, fill = 0)
+        drawblack.text((15, 65), f'{e[16:]}', font = robotoblack18, fill = 0)
+        draw_other.text((55, 2), "ERROR!", font=robotoblack28, fill=0)
         
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
         draw_other.rectangle((0, 30, epd.height, 35), fill=0)
