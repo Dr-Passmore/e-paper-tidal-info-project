@@ -116,8 +116,8 @@ class einkUpdate:
         draw_other = ImageDraw.Draw(HRedimage)
         einkUpdate.loading_message(epd, robotoblack14, robotoblack18, robotoblack24, robotoblack32)
         
-        drawblack.text((5, 28), 'Low', font = robotoblack14, fill=0)
-        drawblack.text((172, 28), 'High', font=robotoblack14, fill=0)
+        drawblack.text((5, 20), 'Low', font = robotoblack14, fill=0)
+        drawblack.text((172, 20), 'High', font=robotoblack14, fill=0)
         
         # Progress Bar
         draw_other.rectangle((30, 70, 30 + progressDraw , 40), fill=0)
