@@ -153,10 +153,10 @@ class einkUpdate:
         else:
             drawblack.text((40, 5), 'Tide Coming In', font=robotoblack18, fill=0)
             drawblack.text((10, 90), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((10, 75), f'{previousEventTime}', font=robotoblack14, fill = 0)
+            drawblack.text((10, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
             draw_other.text((167, 15), 'Next', font=robotoblack14, fill=0)
             drawblack.text((167, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((167, 75), f'{eventTime}', font=robotoblack14, fill = 0)
+            drawblack.text((167, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
             
             # Arrow
             
@@ -221,6 +221,13 @@ class einkUpdate:
             if range_start <= progressBarLength < range_end:
                 return progress_map[(range_start, range_end)]
         return 0
+        
+    def updateTimeDisplay(time):
+        if int(time[0:1]) < 12:
+            time = time + " AM"
+        else:
+            time = time + " PM"
+        return time
         
 logging.basicConfig(filename='TideInfo.log', 
                     filemode='a', 
