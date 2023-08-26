@@ -133,7 +133,7 @@ class einkUpdate:
         draw_other = ImageDraw.Draw(HRedimage)
         einkUpdate.loading_message(epd, robotoblack14, robotoblack18, robotoblack24, robotoblack32)
         
-        drawblack.text((5, 20), 'Low', font = robotoblack14, fill=0)
+        drawblack.text((2, 20), 'Low', font = robotoblack14, fill=0)
         drawblack.text((172, 20), 'High', font=robotoblack14, fill=0)
         
         # Progress Bar
@@ -151,8 +151,8 @@ class einkUpdate:
         
         if event == 'LowWater':
             drawblack.text((40, 5), 'Tide Going Out', font=robotoblack18, fill=0)
-            drawblack.text((5, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((5, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
+            drawblack.text((2, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((2, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
             #draw_other.text((5, 15), 'Next', font=robotoblack14, fill=0)
             drawblack.text((152,90), f'{pastheight:.2f} m', font=robotoblack14, fill = 0)
             drawblack.text((152, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
@@ -169,8 +169,8 @@ class einkUpdate:
             
         else:
             drawblack.text((40, 5), 'Tide Coming In', font=robotoblack18, fill=0)
-            drawblack.text((5, 90), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
-            drawblack.text((5, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
+            drawblack.text((2, 90), f'{pastheight:.2f} m', font=robotoblack14, fill=0)
+            drawblack.text((2, 75), f'{einkUpdate.updateTimeDisplay(previousEventTime)}', font=robotoblack14, fill = 0)
             #draw_other.text((167, 15), 'Next', font=robotoblack14, fill=0)
             drawblack.text((152, 90), f'{height:.2f} m', font=robotoblack14, fill=0)
             drawblack.text((152, 75), f'{einkUpdate.updateTimeDisplay(eventTime)}', font=robotoblack14, fill = 0)
