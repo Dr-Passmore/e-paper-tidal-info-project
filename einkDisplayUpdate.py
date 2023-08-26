@@ -16,7 +16,12 @@ class einkUpdate:
         pass
     
     def error_display(e):
+        '''
+        If an error is found when retrieving data from API. The screen will update to display to alert. 
         
+        Input:
+        e - error message
+        '''
         e = str(e)
         
         epd = epd2in13bc.EPD()
@@ -42,8 +47,13 @@ class einkUpdate:
         
         epd.display(epd.getbuffer(HBlackimage), epd.getbuffer(HRedimage))
         epd.sleep()
+        logging.info("Error message displayed")
     
     def refresh_display(epd):
+        '''
+        Initialises and clears display
+        Input: epd
+        '''
         logging.info("Refreshing Display")
         epd.init()
         epd.Clear()
@@ -199,6 +209,16 @@ class einkUpdate:
         return updateCompleted
     
     def progressBar(progress):
+        '''
+        Provides length of the progress bar based on progress percentage
+        
+        Input: 
+        'progress' - Percentage between previous and next tide events
+        
+        Output: 
+        'progressDraw' - int number between 7 and 152 selected from dictionary that has split 100% by 30 
+        '''
+        
         logging.info(f"Getting progress bar length")
         progressBarLength = float(progress)
         #212 - 30 - 30 = 152
@@ -240,6 +260,15 @@ class einkUpdate:
         return 0
         
     def updateTimeDisplay(time):
+        '''
+        Cleans up display of time - Adds AM or PM depending on time of day
+        
+        Input:
+        string of 'Time'
+        
+        Output: 
+        returns string of 'Time' with either AM or PM 
+        '''
         if int(time[0:2]) < 12:
             time = time + "AM"
         else:
