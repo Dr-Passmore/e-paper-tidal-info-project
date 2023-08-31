@@ -1,3 +1,4 @@
+import pytz
 import tideInfo
 import einkDisplayUpdate
 import logging
@@ -5,6 +6,7 @@ import datetime
 import time
 import configparser
 import os
+
 
 class TideInformationDisplay:
     def __init__(self):
@@ -20,7 +22,8 @@ class TideInformationDisplay:
         data = tideInfo.tidalEvents.get_data()
         
         screenupdate = TideInformationDisplay.data_processing(self, config, data)
-        print(screenupdate)
+        logging.info(f"{screenupdate}")
+        
     def data_processing(self, config, data):
         """
         Process tidal event data, update records, and send processed data to the e-ink display script.
@@ -54,7 +57,9 @@ class TideInformationDisplay:
                     recordsdate = when
                     timestamp = datetime.datetime.timestamp(when)
                     now = time.time()
+                    eventTime = TideInformationDisplay.updateTimeZone(self, eventTime)
                     eventTime = eventTime[11:16]
+                    
                     if timestamp > now:
                         break
                     else: 
@@ -62,6 +67,7 @@ class TideInformationDisplay:
                         pastheight = height
                         previousEventTime = eventTime
                         prioreventTime = timestamp
+            
             
             if event == 'HighWater':
                 currentRecord = config.get('Records', 'Highest Tide Height')
@@ -115,6 +121,21 @@ class TideInformationDisplay:
             progress = 100 - progress
         
         return progress
+    
+    def updateTimeZone(self, eventTime):
+        """
+        Converts a datetime string to the 'Europe/London' time zone.
+
+        Input:
+        - eventTime: A datetime string in the format '%Y-%m-%dT%H:%M:%S'.
+
+        Output:
+        - A string representation of the datetime in 'Europe/London' time zone.
+        """
+        local_tz = pytz.timezone("Europe/London")
+        eventTime = datetime.datetime.strptime(eventTime, '%Y-%m-%dT%H:%M:%S')
+        return str(eventTime.replace(tzinfo=pytz.utc).astimezone(local_tz))
+        
     
     def configurationFileCreation(self, config):
         """

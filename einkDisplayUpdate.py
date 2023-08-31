@@ -1,6 +1,6 @@
 import logging
-from PIL import Image,ImageDraw,ImageFont
-from waveshare_epd import epd2in13bc
+#from PIL import Image,ImageDraw,ImageFont
+#from waveshare_epd import epd2in13bc
 import time
 import configparser
 import random
@@ -22,20 +22,27 @@ class einkUpdate:
         Input:
         e - error message
         '''
+        # Converts error message to string
         e = str(e)
         
+        # Sets up epd and called function to init and clear screen
         epd = epd2in13bc.EPD()
         einkUpdate.refresh_display(epd)
+        
+        # Defines
         HBlackimage = Image.new('1', (epd.height, epd.width), 255)
         HRedimage = Image.new('1', (epd.height, epd.width), 255)
         robotoblack28 = ImageFont.truetype('pic/Roboto-Black.ttf', 28)
         robotoblack18 = ImageFont.truetype('pic/Roboto-Black.ttf', 18)
         drawblack = ImageDraw.Draw(HBlackimage)
         draw_other = ImageDraw.Draw(HRedimage)
+        
+        # Error Message
         drawblack.text((15, 45), f'{e[0:16]}', font = robotoblack18, fill = 0)
         drawblack.text((15, 65), f'{e[16:]}', font = robotoblack18, fill = 0)
         draw_other.text((55, 2), "ERROR!", font=robotoblack28, fill=0)
         
+        # Draws Red Borders around the screen and between the title and error message
         draw_other.rectangle((0, 0, epd.height, 5), fill=0)
         draw_other.rectangle((0, 30, epd.height, 35), fill=0)
         draw_other.rectangle((0, 30, 5, 0), fill=0)
