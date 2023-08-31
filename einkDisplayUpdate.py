@@ -1,6 +1,6 @@
 import logging
-#from PIL import Image,ImageDraw,ImageFont
-#from waveshare_epd import epd2in13bc
+from PIL import Image,ImageDraw,ImageFont
+from waveshare_epd import epd2in13bc
 import time
 import configparser
 import random
